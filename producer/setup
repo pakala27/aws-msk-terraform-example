@@ -1,0 +1,35 @@
+# Configure AWS Profile
+aws configure --profile aws-msk-user
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [None]: eu-central-1
+Default output format [None]: json
+
+#Kafka Producer to send messages to topic
+BOOTSTRAP_SERVERS='get from msk cluster'
+kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS --list --command-config client.properties
+kafka-topics.sh --bootstrap-server $BOOTSTRAP_SERVERS \
+                --create \
+                --topic tpc1 \
+                --partitions 3 \
+                --replication-factor 3 \
+                --command-config client.properties
+
+kafka-console-producer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
+                          --topic tpc1 \
+                          --producer.config client.properties
+
+kafka-console-consumer.sh --bootstrap-server $BOOTSTRAP_SERVERS \
+                          --topic tpc1 \
+                          --group grp1 \
+                          --from-beginning \
+                          --consumer.config client.properties
+
+kafka-producer-perf-test.sh --producer-props bootstrap.servers=$BOOTSTRAP_SERVERS \
+                            --num-records 1000 \
+                            --throughput 50 \
+                            --record-size 1000 \
+                            --topic tpc1 \
+                            --producer.config client.properties \
+                            --print-metrics
+

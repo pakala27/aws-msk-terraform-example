@@ -1,0 +1,8 @@
+#Download prometheus
+wget https://github.com/prometheus/prometheus/releases/download/v2.29.2/prometheus-2.29.2.linux-amd64.tar.gz
+gunzip prometheus-2.29.2.linux-amd64.tar.gz
+tar -xf prometheus-2.29.2.linux-amd64.tar
+cd prometheus-2.29.2.linux-amd64
+#prepare prometheus.yml and targets.json files
+#Start Prometheus server
+./prometheus

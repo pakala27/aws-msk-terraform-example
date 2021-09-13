@@ -1,0 +1,38 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:Connect",
+                "kafka-cluster:AlterCluster",
+                "kafka-cluster:DescribeCluster"
+            ],
+            "Resource": [
+                "arn:aws:kafka:eu-central-1:077175212337:cluster/msk-cluster-01/58247245-ca2b-47af-bfdf-d65a03f9c2cc-1"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:*Topic*",
+                "kafka-cluster:WriteData",
+                "kafka-cluster:ReadData",
+                "kafka-cluster:CreateTopic"
+            ],
+            "Resource": [
+                "arn:aws:kafka:eu-central-1:077175212337:topic/msk-cluster-01/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:AlterGroup",
+                "kafka-cluster:DescribeGroup"
+            ],
+            "Resource": [
+                "arn:aws:kafka:eu-central-1:077175212337:group/msk-cluster-01/*"
+            ]
+        }
+    ]
+}
